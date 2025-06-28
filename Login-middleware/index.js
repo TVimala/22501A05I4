@@ -42,5 +42,4 @@ const log = async (stack, level, pkg, message) => {
     });
   } catch (_) { }
 };
-
 export default log;
