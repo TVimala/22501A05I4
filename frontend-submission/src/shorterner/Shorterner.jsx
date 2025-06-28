@@ -71,48 +71,101 @@ const ShortenerPage = () => {
   };
 
   return (
-    <Grid container spacing={2} sx={{ padding: 4, backgroundColor: '#ffffff', color: 'black' }}>
+   <Grid
+  container
+  spacing={3}
+  sx={{
+    padding: 4,
+    backgroundColor: '#ffffff',
+    color: 'black',
+    minHeight: '100vh',
+  }}
+>
   <Grid item xs={12}>
-    <Typography variant="h4" color="black">URL Shortener</Typography>
+    <Typography variant="h4" color="black" gutterBottom>
+      URL Shortener
+    </Typography>
   </Grid>
-
   {inputs.map((input, idx) => (
-    <Grid container spacing={2} key={idx}>
-      <Grid item xs={4}>
-        <TextField fullWidth label="URL" value={input.url} onChange={(e) => handleChange(idx, 'url', e.target.value)} />
-      </Grid>
-      <Grid item xs={3}>
-        <TextField fullWidth label="Validity (mins)" value={input.validity} onChange={(e) => handleChange(idx, 'validity', e.target.value)} />
-      </Grid>
-      <Grid item xs={3}>
-        <TextField fullWidth label="Shortcode (optional)" value={input.shortcode} onChange={(e) => handleChange(idx, 'shortcode', e.target.value)} />
+    <Grid
+      item
+      xs={12}
+      key={idx}
+      sx={{
+        border: '1px solid #ccc',
+        borderRadius: 2,
+        padding: 2,
+        backgroundColor: '#f9f9f9',
+      }}
+    >
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            label="Original URL"
+            value={input.url}
+            onChange={(e) => handleChange(idx, 'url', e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={6} md={3}>
+          <TextField
+            fullWidth
+            label="Validity (mins)"
+            value={input.validity}
+            onChange={(e) => handleChange(idx, 'validity', e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={6} md={3}>
+          <TextField
+            fullWidth
+            label="Custom Shortcode (optional)"
+            value={input.shortcode}
+            onChange={(e) => handleChange(idx, 'shortcode', e.target.value)}
+          />
+        </Grid>
       </Grid>
     </Grid>
   ))}
-
   <Grid item xs={12}>
-    <Button onClick={handleAdd} disabled={inputs.length >= 5}>Add More</Button>
-    <Button variant="contained" onClick={handleShorten}>Shorten</Button>
+    <Button
+      variant="outlined"
+      onClick={handleAdd}
+      disabled={inputs.length >= 5}
+      sx={{ marginRight: 2 }}
+    >
+      Add More
+    </Button>
+    <Button variant="contained" onClick={handleShorten}>
+      Shorten URLs
+    </Button>
+    <Button variant="outlined" href="/analytics">View Analytics</Button>
   </Grid>
-
   {error && (
     <Grid item xs={12}>
       <Alert severity="error">{error}</Alert>
     </Grid>
   )}
-
   {results.map((res, i) => (
     <Grid item xs={12} key={i}>
-      <Card sx={{ backgroundColor: '#f9f9f9' }}>
+      <Card sx={{ backgroundColor: '#f1f1f1' }}>
         <CardContent>
-          <Typography color="black"><b>Original:</b> {res.originalUrl}</Typography>
-          <Typography color="black">
-            <b>Shortened:</b>{' '}
-            <a href={`/${res.shortcode}`} target="_blank" rel="noopener noreferrer">
+          <Typography variant="subtitle1" color="black">
+            <b>Original URL:</b> {res.originalUrl}
+          </Typography>
+          <Typography variant="subtitle1" color="black">
+            <b>Shortened URL:</b>{' '}
+            <a
+              href={`/${res.shortcode}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#1976d2' }}
+            >
               {window.location.origin}/{res.shortcode}
             </a>
           </Typography>
-          <Typography color="black"><b>Expires at:</b> {res.expiresAt}</Typography>
+          <Typography variant="subtitle1" color="black">
+            <b>Expires At:</b> {res.expiresAt}
+          </Typography>
         </CardContent>
       </Card>
     </Grid>
