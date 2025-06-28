@@ -4,6 +4,7 @@ import Shorterner from './shorterner/Shorterner';
 import Redirect from './redirect/Redirect';
 import Statistics from './statistics/Statistics';
 import Analytics from './analytics/Analytics';
+import './App.css'; 
 const App = () => (
   <Router>
     <Routes>
