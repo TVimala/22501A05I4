@@ -1,18 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Shorterner from './shorterner/Shorterner'
-function App() {
-  const [count, setCount] = useState(0)
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Shorterner from './shorterner/Shorterner';
+import Redirect from './redirect/Redirect';
+import Statistics from './statistics/Statistics';
 
-  return (
-    <>
-     <div>
-       <Shorterner/>
-     </div>
-    </>
-  )
-}
+const App = () => (
+  <Router>
+    <Routes>
+      <Route path="/" element={<Shorterner />} />
+      <Route path="/stats" element={<Statistics />} />
+      <Route path="/:shortcode" element={<Redirect />} />
+    </Routes>
+  </Router>
+);
 
-export default App
+export default App;
